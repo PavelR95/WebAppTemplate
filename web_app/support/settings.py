@@ -10,9 +10,15 @@ class Settings(BaseSettings):
     VERSION: str = "v0.0.1"
 
     # Logger settings
-    log_level: str = "INFO"
+    log_level_default: str = "INFO"
     log_message_format: str = "%(asctime)s - %(name)s [%(levelname)s] - %(message)s"
     log_datetime_format: str = "%Y-%m-%d %H:%M:%S"
+
+    @property
+    def log_level(self) -> str:
+        if self.DEBUG is True:
+            return "DEBUG"
+        return self.log_level_default
 
     # App settings
 

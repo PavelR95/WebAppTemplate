@@ -10,6 +10,9 @@ from ..support import settings, getLogger
 
 def application_factory():
     app_logger = getLogger("WEB_APP")
+    app_logger.debug(
+        f"Init WEB ASGI Application: {settings.TITLE}"
+    )
     app = FastAPI(
         debug=settings.DEBUG,
         title=settings.TITLE,
