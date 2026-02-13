@@ -2,11 +2,17 @@
 # Requirements
 import uvicorn
 # Application
-from .app import application_factory
+from .app import get_app_import
+# Support
+from ..support import settings
 
 
 def run_server():
-    app = application_factory()
     uvicorn.run(
-        app=app
+        app=get_app_import(),
+        factory=settings.server_factory,
+        host=settings.server_host,
+        port=settings.server_port,
+        reload=settings.server_reload,
+        workers=settings.server_workers,
     )
