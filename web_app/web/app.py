@@ -6,6 +6,8 @@ from fastapi import FastAPI
 from .lifespan import lifespan
 # Support
 from ..support import settings, getLogger
+# Router
+from .router import base_router
 
 
 def application_factory():
@@ -19,6 +21,13 @@ def application_factory():
         description=settings.DESCRIPTION,
         version=settings.VERSION,
         lifespan=lifespan
+    )
+    app.state.logger = app_logger
+    app_logger.debug(
+        f"Include Router: {base_router.prefix}"
+    )
+    app.include_router(
+        base_router
     )
     return app
 

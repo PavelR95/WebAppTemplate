@@ -21,6 +21,7 @@ class Settings(BaseSettings):
         return self.log_level_default
 
     # App settings
+    app_base_router: str = "/web_template"
 
     # Server settings
     server_host: str = "0.0.0.0"
@@ -32,7 +33,7 @@ class Settings(BaseSettings):
     @property
     def server_workers(self):
         if self.server_reload is True:
-            return None
+            return 1
         else:
             return self.server_workers_default
 
